@@ -23,7 +23,7 @@ public:
 	{
 		int num_images = 0;
 		string temp;
-		ifstream mri_data("MRI.data");
+		ifstream mri_data(baseName+".data");
 		getline(mri_data, temp, ' ');
 		istringstream(temp) >> width;
 		getline(mri_data, temp, ' ');
