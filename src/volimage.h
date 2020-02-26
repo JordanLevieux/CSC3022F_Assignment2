@@ -5,6 +5,8 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <iostream>
+#include <sstream>
 
 //Default namespace
 using namespace std;
@@ -14,7 +16,7 @@ namespace LVXJOR001
 {
 	bool readImages(string baseName);	
 	void diffmap(int sliceI, int sliceJ, string output_prifix);
-	void extract(intsliceId, string output_prefix);
-	int volImageSize(void);
+	void extract(int sliceId, string output_prefix);
+	int volImageSize();
 }
 #endif

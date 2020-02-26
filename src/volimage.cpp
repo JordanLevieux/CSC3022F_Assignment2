@@ -5,7 +5,7 @@ class VolImage
 private:
 
 	int width, height;
-	vector<unsigned char**> slices;
+	vector<char**> slices;
 	
 public:
 
@@ -13,33 +13,49 @@ public:
 	{
 		width = 0;
 		height = 0;
-		slices = new vector<usigned char**>;
+		//slices = new vector<char**>;
 	}
 	~VolImage()
 	{
-		delete slices;
 	}
 	
 	
-	bool LVXJOR001::readImages(string baseName)
+	bool readImages(string baseName)
 	{
-		int numImages = 0;
+		int num_images = 0;
+		string temp;
 		ifstream mri_data("MRI.data");
-		getline(mri_data, width, ',');
-		getline(mri_data, height, ',');
-		getline(mri_data, numImages, ',');
+		getline(mri_data, temp, ' ');
+		istringstream(temp) >> width;
+		getline(mri_data, temp, ' ');
+		istringstream(temp) >> height;
+		getline(mri_data, temp);
+		istringstream(temp) >> num_images;
 		mri_data.close();
 		
-		for (int i=0,i<numImages,i++)
+		long pos;
+		//popluate the vector
+		ifstream mriscans;
+		for (int i=0;i<num_images;i++)
 		{
+			mriscans.open(baseName+to_string(i)+".raw", ios::in | ios::binary);
+			pos = 0; //store position of get pointer
+			//slices.emplace(new char[height][width]);
 			
+			for (int j=0;j<height;j++)
+			{
+				mriscans.seekg(pos);
+				mriscans.read(slices[i][j], width);
+				pos += width;
+			}
 		}
+		return true;
 	}
 	
-	void LVXJOR001::diffmap(int sliceI, int sliceJ, string output_prifix){}
+	void diffmap(int sliceI, int sliceJ, string output_prifix){}
 	
-	void LVXJOR001::extract(intsliceId, string output_prefix){}
+	void extract(int sliceId, string output_prefix){}
 	
-	int LVXJOR001::volImageSize(void){}
+	int volImageSize(void){return 0;}
 	
 };
