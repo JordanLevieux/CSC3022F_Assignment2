@@ -13,7 +13,6 @@ public:
 	{
 		width = 0;
 		height = 0;
-		//slices = new vector<char**>;
 	}
 	~VolImage()
 	{
@@ -40,10 +39,11 @@ public:
 		{
 			mriscans.open(baseName+to_string(i)+".raw", ios::in | ios::binary);
 			pos = 0; //store position of get pointer
-			//slices.emplace(new char[height][width]);
+			slices.emplace_back(new char*[height]);
 			
 			for (int j=0;j<height;j++)
 			{
+				slices[i][j] = new char[width];
 				mriscans.seekg(pos);
 				mriscans.read(slices[i][j], width);
 				pos += width;
