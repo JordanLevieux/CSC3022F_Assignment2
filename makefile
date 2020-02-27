@@ -7,12 +7,12 @@ OBJS = obj/*
 
 default:
     mkdir -p bin obj
-    $(CC) $(CFLAGS) -c src/StudentDatabase.cpp -o obj/StudentDatabase
-    $(CC) $(CFLAGS) -c src/StudentRecord.cpp -o obj/StudentRecord
-    $(CC) $(CFLAGS) obj/StudentDatabase obj/StudentRecord -o bin/StudentDB
+    $(CC) $(CFLAGS) -c src/Driverimage.cpp -o obj/Driverimage
+    $(CC) $(CFLAGS) -c src/volimage.cpp -o obj/volimage
+    $(CC) $(CFLAGS) obj/Driverimage obj/volimage -o bin/volimage
 
 run:
-    bin/StudentDB
+    bin/volimage
 
 clean:
     rm $(PROG) $(OBJS)
