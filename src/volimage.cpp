@@ -36,6 +36,7 @@ VolImage::VolImage()
 		//Populate the vector with raw data from scans
 		ifstream mriscans;
 		long pos;
+		
 		for (int i=0;i<num_images;i++)
 		{
 			//Open raw files
@@ -52,15 +53,39 @@ VolImage::VolImage()
 				mriscans.seekg(pos);
 				mriscans.read(slices[i][j], width);
 				pos += width;
+				//cout<<pos<<",";
 			}
 			mriscans.close();
 		}
 		return true;
 	}
 	
-	void VolImage::diffmap(int sliceI, int sliceJ, string output_prifix){}
+	//Write slice to output.raw
+	void VolImage::diffmap(int sliceI, int sliceJ, string output_prefix)
+	{
+		ofstream outFile(output_prefix+".raw");
+		for (int i=0; i<height; i++)
+		{
+			for (int j=0; j<width; j++)
+			{
+				outFile<<(unsigned char)(abs((float)slices[sliceI][i][j] - (float)slices[sliceJ][i][j])/2);
+			}
+		}
+		outFile.close();
+	}
 	
-	void VolImage::extract(int sliceId, string output_prefix){}
+	void VolImage::extract(int sliceId, string output_prefix)
+	{
+		ofstream outFile(output_prefix+".raw");
+		for (int i=0; i<height; i++)
+		{
+			for (int j=0; j<width; j++)
+			{
+				outFile<<slices[sliceId][i][j];
+			}
+		}
+		outFile.close();
+	}
 	
 	int VolImage::volImageSize(void){return 0;}
 	
