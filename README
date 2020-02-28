@@ -1,0 +1,9 @@
+To compile: "make"
+
+To Run: volimage <imageBase> [-d i j output_file_name] [-x i output_file_name]
+
+Files:
+
+	raws: contains raw files to be manipulated
+
+	src: Source code folder. Has a file for the "volimage" class which stores the 3D image and manipulates it. Has a driver file to recieve user input and call the "volimage" class.

@@ -31,7 +31,7 @@ VolImage::VolImage()
 		getline(mri_data, temp);
 		istringstream(temp) >> num_images;
 		mri_data.close();
-		cout<<"width: "<<width<<"\nheight: "<<height<<"\nnum images: "<<num_images<<endl;
+		cout<<"Number of images: "<<num_images<<"\nNumber of bytes required: "<<(num_images*height*width)<<endl;
 		
 		//Populate the vector with raw data from scans
 		ifstream mriscans;
